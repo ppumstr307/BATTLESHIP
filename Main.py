@@ -18,8 +18,9 @@ def main():
     chance=15
     
     cur_chnc_p1=0
-    
     cur_chnc_p2=0
+
+    switch = True
 
     # Ships coordinates
     p1_ships = Battleship_Drag.p1_ship_loca
@@ -117,43 +118,49 @@ def main():
                     row = y // cube_size
 
 
-                    if (row, col) in p1_ships_refined:
-                        print('Shot fired at: ',(row, col))
-                        print('Thats a Hit!')
-                        hit_squares_p1.append((row, col))
-                        cur_chnc_p1+=1
-                        p2_ship_des+=1
-                        print('Ammo Fired by Player 2: ',cur_chnc_p1, 'Units')
-                        print('Ammo left for Player 2: ', (15-cur_chnc_p1), 'Units')
-                        print()
+                    if switch == True:
+                        if row >= 1 and col >=1 and row <= 10 and col <= 10:
+                            switch = False
+                            if (row, col) in p1_ships_refined:
+                                print('Shot fired at: ',(row, col))
+                                print('Thats a Hit!')
+                                hit_squares_p1.append((row, col))
+                                cur_chnc_p1+=1
+                                p2_ship_des+=1
+                                print('Ammo Fired by Player 2: ',cur_chnc_p1, 'Units')
+                                print('Ammo left for Player 2: ', (15-cur_chnc_p1), 'Units')
+                                print()
 
-                    elif (row, col) in p2_ships_refined:
-                        print('Shot fired at: ',(row, col))
-                        print('Thats a Hit!')
-                        hit_squares_p2.append((row, col))
-                        cur_chnc_p2+=1
-                        p1_ship_des+=1
-                        print('Ammo Fired by Player 1: ',cur_chnc_p2, 'Units')
-                        print('Ammo left for Player 1: ', (15-cur_chnc_p2), 'Units')
-                        print()
+                            else:
+                                miss_squares.append((row, col))
+                                cur_chnc_p1+=1
+                                print('Ammo Fired by Player 2: ',cur_chnc_p1, 'Units')
+                                print('Ammo left for Player 2: ', (15-cur_chnc_p1), 'Units')
+                                print()
+                        else:
+                            pass
 
-                    elif ((row>=1 and col>=1) and (row<=10 and col <=10)) or ((row>=1 and col>=13) and (row<=10 and col <=22)):
-                        print('Shot fired at: ',(row, col))
-                        print('Missed!...Try guessing at different Cells')
-                        miss_squares.append((row, col))
-                        
+                    if switch == False:
+                        if row >= 1 and col >=13 and row <= 10 and col <= 22:
+                            switch = True
+                            if (row, col) in p2_ships_refined:
+                                print('Shot fired at: ',(row, col))
+                                print('Thats a Hit!')
+                                hit_squares_p2.append((row, col))
+                                cur_chnc_p2+=1
+                                p1_ship_des+=1
+                                print('Ammo Fired by Player 1: ',cur_chnc_p2, 'Units')
+                                print('Ammo left for Player 1: ', (15-cur_chnc_p2), 'Units')
+                                print()
 
-                        if col<=10 :
-                           cur_chnc_p1+=1
-                           print('Ammo Fired by Player 2: ',cur_chnc_p1, 'Units')
-                           print('Ammo left for Player 2: ', (15-cur_chnc_p1), 'Units')
-                           print()
-
-                        elif col>=13:
-                            cur_chnc_p2+=1 
-                            print('Ammo Fired by Player 1: ',cur_chnc_p2, 'Units')
-                            print('Ammo left for Player 1: ', (15-cur_chnc_p2), 'Units')
-                            print()
+                            else:
+                                cur_chnc_p2+=1 
+                                miss_squares.append((row, col))
+                                print('Ammo Fired by Player 1: ',cur_chnc_p2, 'Units')
+                                print('Ammo left for Player 1: ', (15-cur_chnc_p2), 'Units')
+                                print()
+                        else:
+                            pass
 
         # Draw hit and miss squares
         for row, col in hit_squares_p1:
