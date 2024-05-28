@@ -130,11 +130,11 @@ def main():
 
         # Draw hit and miss squares
         for row, col in hit_squares_p1:
-            pygame.draw.rect(screen, color, pygame.Rect(col * cube_size+10, row * cube_size+10, cube_size, cube_size))
+            pygame.draw.rect(screen, color, pygame.Rect(col * cube_size+20, row * cube_size+20, cube_size-18, cube_size-18), border_radius = 15)
         for row, col in hit_squares_bot:
-            pygame.draw.rect(screen, color, pygame.Rect(col * cube_size+10, row * cube_size+10, cube_size, cube_size))
+            pygame.draw.rect(screen, color, pygame.Rect(col * cube_size+20, row * cube_size+20, cube_size-18, cube_size-18), border_radius = 15)
         for row, col in miss_squares:
-            pygame.draw.rect(screen, color_safe, pygame.Rect(col * cube_size+10, row * cube_size+10, cube_size, cube_size))
+            pygame.draw.rect(screen, color_safe, pygame.Rect(col * cube_size+20, row * cube_size+20, cube_size-18, cube_size-18), border_radius = 15)
 
         # Grid
         for x in range(1, grid_size + 2):
